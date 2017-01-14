@@ -27,25 +27,36 @@ namespace zad4
     {
             this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
+            
             GUI();
             AllowDrop = true;
     }
 
-
-    public void GUI()
+        
+        public void GUI()
     {
-
+      panel1 = new Panel()
+      {
+          Dock = DockStyle.Fill
+      };
       pasekMenu = new PasekMenu(this);
-      pasekStanu = new PasekStanu();
-            pasekStanu.SetPasekStanu("");
-        this.Controls.Add(pasekStanu);
-
-        pasekMenu.wczytajKamere.Click += ActionPerformed;
+      pasekStanu = new PasekStanu(panel1);
+            pasekStanu.paintComponent();
+            pasekStanu._panel.Refresh();
+            pasekMenu.wczytajKamere.Click += ActionPerformed;
         pasekMenu.wczytajScene.Click += ActionPerformed;
         pasekMenu.wPersp.Click += ActionPerformed;
-        
-        //this.MouseMove += mouseMoved;
-        this.MouseWheel += mouseWheelMoved;
+            pasekMenu.settings.Click += NewAction;
+            pasekStanu.pKameryX.TextChanged += ActionPerformed;
+            pasekStanu.pKameryY.TextChanged += ActionPerformed;
+            pasekStanu.pKameryZ.TextChanged += ActionPerformed;
+            pasekStanu.pObrazuX.TextChanged += ActionPerformed;
+            pasekStanu.pObrazuY.TextChanged += ActionPerformed;
+            pasekStanu.pObrazuZ.TextChanged += ActionPerformed;
+            pasekStanu.pow.TextChanged += ActionPerformed;
+
+            //this.MouseMove += mouseMoved;
+            this.MouseWheel += mouseWheelMoved;
 
         //OrtX1.pb.DragDrop += mouseDragged;
         //ortY1.pb.DragDrop += mouseDragged;
@@ -62,7 +73,17 @@ namespace zad4
             ortY1.pb.MouseUp += new MouseEventHandler(c_MouseUp);
             ortZ1.pb.MouseUp += new MouseEventHandler(c_MouseUp);
         }
-        void c_MouseDown(object sender, MouseEventArgs e)
+
+      private void NewAction(object sender, EventArgs e)
+      {
+          var form = new Form();
+          form.Controls.Add(pasekStanu._panel);
+          pasekStanu.paintComponent();
+            pasekStanu._panel.Refresh();
+          form.Show();
+      }
+
+      void c_MouseDown(object sender, MouseEventArgs e)
         {
             
             _isDragging = true;
@@ -721,7 +742,7 @@ namespace zad4
             var locationOrtX1 = (OrtX1).PointToScreen(Point.Empty);
             var locationOrtY1 = (ortY1).PointToScreen(Point.Empty);
             var locationOrtZ1 = (ortZ1).PointToScreen(Point.Empty);
-            pasekStanu.changeLabel("");
+
             if (x >= locationOrtX1.X &&
                     x <locationOrtX1.X + OrtX1.Width &&
                     y >=locationOrtX1.Y &&
@@ -892,7 +913,6 @@ namespace zad4
                 Refresh();
             }
         }
-
     }
 }
 

@@ -16,7 +16,8 @@ namespace zad4
     public MenuItem zakoncz;
     Menu opcje;
     public MenuItem wPersp;
-    private Form _form;
+    public MenuItem settings;
+    public Form _form;
 
     public PasekMenu(Form form)
     {
@@ -39,7 +40,9 @@ namespace zad4
       Name = "Opcje"
     };
     wPersp = new MenuItem("Rzut perspektywiczny/prosty");
+    settings = new MenuItem("Ustawienia");
     opcje.MenuItems.Add(wPersp);
+    opcje.MenuItems.Add(settings);
       MenuItem[] arraItems = new MenuItem[plik.MenuItems.Count];
       MenuItem[] arra2Items = new MenuItem[opcje.MenuItems.Count];
       plik.MenuItems.CopyTo(arraItems, 0);

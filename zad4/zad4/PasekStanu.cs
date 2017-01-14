@@ -3,27 +3,26 @@ using System.Windows.Forms;
 
 namespace zad4
 {
-    public class PasekStanu : Panel
+    public class PasekStanu 
     {
         public TextBox katKamery;
-        private readonly Label katKameryL;
-        private readonly Label pKameryL;
+        public Label katKameryL;
+        public Label pKameryL;
         public TextBox pKameryX;
         public TextBox pKameryY;
         public TextBox pKameryZ;
-        private readonly Label pObrazuL;
+        public Label pObrazuL;
         public TextBox pObrazuX;
         public TextBox pObrazuY;
         public TextBox pObrazuZ;
         public TextBox pow;
-        private readonly Label powL;
+ 
+        public Panel _panel;
 
-        private readonly Label status;
-
-        public PasekStanu()
+        public PasekStanu(Panel panel)
         {
-            status = new Label();
-            powL = new Label();
+            _panel = panel;
+
             pow = new TextBox
             {
                 Text = "90"
@@ -68,49 +67,40 @@ namespace zad4
             {
                 Text = "0"
             };
-            Controls.Add(status);
-            Controls.Add(pow);
-            Controls.Add(powL);
-            Controls.Add(pKameryL);
-            Controls.Add(pObrazuL);
-            Controls.Add(pKameryX);
-            Controls.Add(pKameryY);
-            Controls.Add(pKameryZ);
-            Controls.Add(pObrazuX);
-            Controls.Add(pObrazuY);
-            Controls.Add(pObrazuZ);
-            Controls.Add(katKamery);
-            Controls.Add(katKameryL);
-            this.Dock = DockStyle.Fill;
+            _panel.Controls.Add(pow);
+            _panel.Controls.Add(pKameryL);
+            _panel.Controls.Add(pObrazuL);
+            _panel.Controls.Add(pKameryX);
+            _panel.Controls.Add(pKameryY);
+            _panel.Controls.Add(pKameryZ);
+            _panel.Controls.Add(pObrazuX);
+            _panel.Controls.Add(pObrazuY);
+            _panel.Controls.Add(pObrazuZ);
+            _panel.Controls.Add(katKamery);
+            _panel.Controls.Add(katKameryL);
         }
-
-        public void  SetPasekStanu(string startString)
+        
+        public void paintComponent()
         {
-            status.Text = startString;
-        }
-
-        public void paintComponent(Graphics g)
-        {
-            paintComponent(g);
-            powL.SetBounds(0, 0, 100, 20);
+           
             pow.SetBounds(100, 1, 33, 20);
-            pKameryL.SetBounds(165, 0, 120, 20);
+            pKameryL.SetBounds(165, 0, 33, 20);
             pKameryX.SetBounds(270, 1, 33, 20);
             pKameryY.SetBounds(303, 1, 33, 20);
             pKameryZ.SetBounds(336, 1, 33, 20);
-            pObrazuL.SetBounds(400, 0, 120, 20);
+            pObrazuL.SetBounds(400, 0, 33, 20);
             pObrazuX.SetBounds(500, 1, 33, 20);
             pObrazuY.SetBounds(533, 1, 33, 20);
             pObrazuZ.SetBounds(566, 1, 33, 20);
             katKameryL.SetBounds(635, 0, 80, 20);
             katKamery.SetBounds(705, 1, 33, 20);
-            status.SetBounds(750, 0, 200, 20);
+            
         }
 
-        public void changeLabel(string text)
-        {
-            status.Text = text;
-            Refresh();
-        }
+        //public void changeLabel(string text)
+        //{
+        //    status.Text = text;
+        //    Refresh();
+        //}
     }
 }

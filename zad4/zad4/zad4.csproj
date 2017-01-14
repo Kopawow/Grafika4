@@ -72,9 +72,7 @@
     <Compile Include="PasekMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PasekStanu.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="PasekStanu.cs" />
     <Compile Include="Persp.cs">
       <SubType>Component</SubType>
     </Compile>

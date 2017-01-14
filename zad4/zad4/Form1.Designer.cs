@@ -40,7 +40,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.pasekStanu1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 605);
             this.panel1.Name = "panel1";
@@ -117,7 +116,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private PasekStanu pasekStanu1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Persp persp1;
         private OrtX OrtX1;
