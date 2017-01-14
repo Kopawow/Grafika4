@@ -102,7 +102,6 @@
             this.ortY1.Name = "ortY1";
             this.ortY1.Size = new System.Drawing.Size(330, 297);
             this.ortY1.TabIndex = 2;
-            this.ortY1.Paint += new System.Windows.Forms.PaintEventHandler(this.ortY1_Paint);
             // 
             // ortZ1
             // 
