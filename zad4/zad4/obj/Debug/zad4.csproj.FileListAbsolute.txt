@@ -8,3 +8,13 @@ C:\Users\cieka\OneDrive\dokumenty\visual studio 2015\Projects\zad4\zad4\bin\Debu
 C:\Users\cieka\OneDrive\dokumenty\visual studio 2015\Projects\zad4\zad4\obj\Debug\zad4.exe
 C:\Users\cieka\OneDrive\dokumenty\visual studio 2015\Projects\zad4\zad4\obj\Debug\zad4.pdb
 C:\Users\cieka\OneDrive\dokumenty\visual studio 2015\Projects\zad4\zad4\obj\Debug\zad4.Form1.resources
+C:\Users\cieka\OneDrive\Dokumenty\Grafika4\zad4\zad4\bin\Debug\zad4.exe.config
+C:\Users\cieka\OneDrive\Dokumenty\Grafika4\zad4\zad4\obj\Debug\zad4.exe
+C:\Users\cieka\OneDrive\Dokumenty\Grafika4\zad4\zad4\obj\Debug\zad4.pdb
+C:\Users\cieka\OneDrive\Dokumenty\Grafika4\zad4\zad4\obj\Debug\zad4.csprojResolveAssemblyReference.cache
+C:\Users\cieka\OneDrive\Dokumenty\Grafika4\zad4\zad4\obj\Debug\zad4.Form1.resources
+C:\Users\cieka\OneDrive\Dokumenty\Grafika4\zad4\zad4\obj\Debug\zad4.Properties.Resources.resources
+C:\Users\cieka\OneDrive\Dokumenty\Grafika4\zad4\zad4\obj\Debug\zad4.csproj.GenerateResource.Cache
+C:\Users\cieka\OneDrive\Dokumenty\Grafika4\zad4\zad4\bin\Debug\zad4.exe
+C:\Users\cieka\OneDrive\Dokumenty\Grafika4\zad4\zad4\bin\Debug\zad4.pdb
+C:\Users\cieka\OneDrive\Dokumenty\Grafika4\zad4\zad4\bin\Debug\Microsoft.Xna.Framework.Avatar.dll

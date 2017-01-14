@@ -19,8 +19,9 @@ namespace zad4
     private bool changeObrazX = false;
     private bool changeObrazY = false;
     private bool changeObrazZ = false;
+        bool _mousePressed;
 
-    public Form1()
+        public Form1()
     {
             this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
@@ -39,6 +40,10 @@ namespace zad4
         pasekMenu.wczytajKamere.Click += ActionPerformed;
         pasekMenu.wczytajScene.Click += ActionPerformed;
         pasekMenu.wPersp.Click += ActionPerformed;
+        this.MouseMove += OnMouseMove;
+        this.MouseWheel += mouseWheelMoved;
+        this.MouseDown += OnMouseDown;
+        this.MouseUp += OnMouseUp;
     }
 
     public void zmienKamere(int x, int y, int z)
@@ -635,6 +640,206 @@ namespace zad4
                 Refresh();
             }
         }
+
+        public void mouseDragged(object sender, MouseEventArgs mouseEventArgs)
+        {
+            var location = ((Control) sender).PointToScreen(Point.Empty);
+            int x = location.X;
+            int y = location.Y;
+
+            var locationOrtX1 = (ortX1).PointToScreen(Point.Empty);
+            var locationOrtY1 = (ortY1).PointToScreen(Point.Empty);
+            var locationOrtZ1 = (ortZ1).PointToScreen(Point.Empty);
+            pasekStanu.changeLabel("");
+            if (x >= locationOrtX1.X &&
+                    x <locationOrtX1.X + ortX1.Width &&
+                    y >=locationOrtX1.Y &&
+                    y <locationOrtX1.Y + ortX1.Height)
+            {
+                if (changeObrazY)
+                {
+                    ortX1.srodekObrazu[1] = (int)((double)(x -locationOrtX1.X - (double)ortX1.Width / 2) * ((double)ortX1.prop / ((double)(ortX1.Width * ortX1.pow))) + (ortX1.minY + ortX1.maxY) / 2);
+                    ortY1.srodekObrazu[1] = (int)((double)(x -locationOrtX1.X - (double)ortX1.Width / 2) * ((double)ortX1.prop / ((double)(ortX1.Width * ortX1.pow))) + (ortX1.minY + ortX1.maxY) / 2);
+                    ortZ1.srodekObrazu[1] = (int)((double)(x -locationOrtX1.X - (double)ortX1.Width / 2) * ((double)ortX1.prop / ((double)(ortX1.Width * ortX1.pow))) + (ortX1.minY + ortX1.maxY) / 2);
+                    persp1.srodekObrazu[1] = (int)((double)(x -locationOrtX1.X - (double)ortX1.Width / 2) * ((double)ortX1.prop / ((double)(ortX1.Width * ortX1.pow))) + (ortX1.minY + ortX1.maxY) / 2);
+                    pasekStanu.pObrazuY.Text = ((double)(x -locationOrtX1.X - (double)ortX1.Width / 2) * ((double)ortX1.prop / ((double)(ortX1.Width * ortX1.pow))) + (ortX1.minY + ortX1.maxY) / 2).ToString();
+                }
+                else if (changeEkranY)
+                {
+                    ortX1.srodekKamery[1] = (int)((double)(x -locationOrtX1.X - (double)ortX1.Width / 2) * ((double)ortX1.prop / ((double)(ortX1.Width * ortX1.pow))) + (ortX1.minY + ortX1.maxY) / 2);
+                    ortY1.srodekKamery[1] = (int)((double)(x -locationOrtX1.X - (double)ortX1.Width / 2) * ((double)ortX1.prop / ((double)(ortX1.Width * ortX1.pow))) + (ortX1.minY + ortX1.maxY) / 2);
+                    ortZ1.srodekKamery[1] = (int)((double)(x -locationOrtX1.X - (double)ortX1.Width / 2) * ((double)ortX1.prop / ((double)(ortX1.Width * ortX1.pow))) + (ortX1.minY + ortX1.maxY) / 2);
+                    persp1.srodekKamery[1] = (int)((double)(x -locationOrtX1.X - (double)ortX1.Width / 2) * ((double)ortX1.prop / ((double)(ortX1.Width * ortX1.pow))) + (ortX1.minY + ortX1.maxY) / 2);
+                    pasekStanu.pKameryY.Text = ((double)(x -locationOrtX1.X - (double)ortX1.Width / 2) * ((double)ortX1.prop / ((double)(ortX1.Width * ortX1.pow))) + (ortX1.minY + ortX1.maxY) / 2).ToString();
+                }
+                if (changeObrazZ)
+                {
+                    ortX1.srodekObrazu[2] = (int)((double)(y -locationOrtX1.Y - (double)ortX1.Height / 2) * ((double)ortX1.prop / ((double)(ortX1.Height * ortX1.pow))) + (ortX1.minZ + ortX1.maxZ) / 2);
+                    ortY1.srodekObrazu[2] = (int)((double)(y -locationOrtX1.Y - (double)ortX1.Height / 2) * ((double)ortX1.prop / ((double)(ortX1.Height * ortX1.pow))) + (ortX1.minZ + ortX1.maxZ) / 2);
+                    ortZ1.srodekObrazu[2] = (int)((double)(y -locationOrtX1.Y - (double)ortX1.Height / 2) * ((double)ortX1.prop / ((double)(ortX1.Height * ortX1.pow))) + (ortX1.minZ + ortX1.maxZ) / 2);
+                    persp1.srodekObrazu[2] = (int)((double)(y -locationOrtX1.Y - (double)ortX1.Height / 2) * ((double)ortX1.prop / ((double)(ortX1.Height * ortX1.pow))) + (ortX1.minZ + ortX1.maxZ) / 2);
+                    pasekStanu.pObrazuZ.Text = ((double)(y -locationOrtX1.Y - (double)ortX1.Height / 2) * ((double)ortX1.prop / ((double)(ortX1.Height * ortX1.pow))) + (ortX1.minZ + ortX1.maxZ) / 2).ToString();
+                }
+                else if (changeEkranZ)
+                {
+                    ortX1.srodekKamery[2] = (int)((double)(y -locationOrtX1.Y - (double)ortX1.Height / 2) * ((double)ortX1.prop / ((double)(ortX1.Height * ortX1.pow))) + (ortX1.minZ + ortX1.maxZ) / 2);
+                    ortY1.srodekKamery[2] = (int)((double)(y -locationOrtX1.Y - (double)ortX1.Height / 2) * ((double)ortX1.prop / ((double)(ortX1.Height * ortX1.pow))) + (ortX1.minZ + ortX1.maxZ) / 2);
+                    ortZ1.srodekKamery[2] = (int)((double)(y -locationOrtX1.Y - (double)ortX1.Height / 2) * ((double)ortX1.prop / ((double)(ortX1.Height * ortX1.pow))) + (ortX1.minZ + ortX1.maxZ) / 2);
+                    persp1.srodekKamery[2] = (int)((double)(y -locationOrtX1.Y - (double)ortX1.Height / 2) * ((double)ortX1.prop / ((double)(ortX1.Height * ortX1.pow))) + (ortX1.minZ + ortX1.maxZ) / 2);
+                    pasekStanu.pKameryZ.Text = ((double)(y -locationOrtX1.Y - (double)ortX1.Height / 2) * ((double)ortX1.prop / ((double)(ortX1.Height * ortX1.pow))) + (ortX1.minZ + ortX1.maxZ) / 2).ToString();
+                }
+            }
+            else if (x >=locationOrtY1.X &&
+                  x <locationOrtY1.X + ortY1.Width &&
+                  y >=locationOrtY1.Y &&
+                  y <locationOrtY1.Y + ortY1.Height)
+            {
+                if (changeObrazX)
+                {
+                    ortX1.srodekObrazu[0] = (int)((double)(x -locationOrtY1.X - (double)ortY1.Width / 2) * ((double)ortY1.prop / ((double)(ortY1.Width * ortX1.pow))) + (ortY1.minX + ortY1.maxX) / 2);
+                    ortY1.srodekObrazu[0] = (int)((double)(x -locationOrtY1.X - (double)ortY1.Width / 2) * ((double)ortY1.prop / ((double)(ortY1.Width * ortX1.pow))) + (ortY1.minX + ortY1.maxX) / 2);
+                    ortZ1.srodekObrazu[0] = (int)((double)(x -locationOrtY1.X - (double)ortY1.Width / 2) * ((double)ortY1.prop / ((double)(ortY1.Width * ortX1.pow))) + (ortY1.minX + ortY1.maxX) / 2);
+                    persp1.srodekObrazu[0] = (int)((double)(x -locationOrtY1.X - (double)ortY1.Width / 2) * ((double)ortY1.prop / ((double)(ortY1.Width * ortX1.pow))) + (ortY1.minX + ortY1.maxX) / 2);
+                    pasekStanu.pObrazuX.Text  = ((double)(x -locationOrtY1.X - (double)ortY1.Width / 2) * ((double)ortY1.prop / ((double)(ortY1.Width * ortX1.pow))) + (ortY1.minX + ortY1.maxX) / 2).ToString();
+                }
+                else if (changeEkranX)
+                {
+                    ortX1.srodekKamery[0] = (int)((double)(x -locationOrtY1.X - (double)ortY1.Width / 2) * ((double)ortY1.prop / ((double)(ortY1.Width * ortX1.pow))) + (ortY1.minX + ortY1.maxX) / 2);
+                    ortY1.srodekKamery[0] = (int)((double)(x -locationOrtY1.X - (double)ortY1.Width / 2) * ((double)ortY1.prop / ((double)(ortY1.Width * ortX1.pow))) + (ortY1.minX + ortY1.maxX) / 2);
+                    ortZ1.srodekKamery[0] = (int)((double)(x -locationOrtY1.X - (double)ortY1.Width / 2) * ((double)ortY1.prop / ((double)(ortY1.Width * ortX1.pow))) + (ortY1.minX + ortY1.maxX) / 2);
+                    persp1.srodekKamery[0] = (int)((double)(x -locationOrtY1.X - (double)ortY1.Width / 2) * ((double)ortY1.prop / ((double)(ortY1.Width * ortX1.pow))) + (ortY1.minX + ortY1.maxX) / 2);
+                    pasekStanu.pKameryX.Text = ((double)(x -locationOrtY1.X - (double)ortY1.Width / 2) * ((double)ortY1.prop / ((double)(ortY1.Width * ortX1.pow))) + (ortY1.minX + ortY1.maxX) / 2).ToString();
+                }
+                if (changeObrazZ)
+                {
+                    ortX1.srodekObrazu[2] = (int)((double)(y -locationOrtY1.Y - (double)ortX1.Height / 2) * ((double)ortY1.prop / ((double)(ortY1.Height * ortX1.pow))) + (ortY1.minZ + ortX1.maxZ) / 2);
+                    ortY1.srodekObrazu[2] = (int)((double)(y -locationOrtY1.Y - (double)ortX1.Height / 2) * ((double)ortY1.prop / ((double)(ortY1.Height * ortX1.pow))) + (ortY1.minZ + ortX1.maxZ) / 2);
+                    ortZ1.srodekObrazu[2] = (int)((double)(y -locationOrtY1.Y - (double)ortX1.Height / 2) * ((double)ortY1.prop / ((double)(ortY1.Height * ortX1.pow))) + (ortY1.minZ + ortX1.maxZ) / 2);
+                    persp1.srodekObrazu[2] = (int)((double)(y -locationOrtY1.Y - (double)ortX1.Height / 2) * ((double)ortY1.prop / ((double)(ortY1.Height * ortX1.pow))) + (ortY1.minZ + ortX1.maxZ) / 2);
+                    pasekStanu.pObrazuZ.Text = ((double)(y -locationOrtY1.Y - (double)ortX1.Height / 2) * ((double)ortY1.prop / ((double)(ortY1.Height * ortX1.pow))) + (ortY1.minZ + ortX1.maxZ) / 2).ToString();
+                }
+                else if (changeEkranZ)
+                {
+                    ortX1.srodekKamery[2] = (int)((double)(y -locationOrtY1.Y - (double)ortX1.Height / 2) * ((double)ortY1.prop / ((double)(ortY1.Height * ortX1.pow))) + (ortY1.minZ + ortX1.maxZ) / 2);
+                    ortY1.srodekKamery[2] = (int)((double)(y -locationOrtY1.Y - (double)ortX1.Height / 2) * ((double)ortY1.prop / ((double)(ortY1.Height * ortX1.pow))) + (ortY1.minZ + ortX1.maxZ) / 2);
+                    ortZ1.srodekKamery[2] = (int)((double)(y -locationOrtY1.Y - (double)ortX1.Height / 2) * ((double)ortY1.prop / ((double)(ortY1.Height * ortX1.pow))) + (ortY1.minZ + ortX1.maxZ) / 2);
+                    persp1.srodekKamery[2] = (int)((double)(y -locationOrtY1.Y - (double)ortX1.Height / 2) * ((double)ortY1.prop / ((double)(ortY1.Height * ortX1.pow))) + (ortY1.minZ + ortX1.maxZ) / 2);
+                    pasekStanu.pKameryZ.Text = ((double)(y -locationOrtY1.Y - (double)ortX1.Height / 2) * ((double)ortY1.prop / ((double)(ortY1.Height * ortX1.pow))) + (ortY1.minZ + ortX1.maxZ) / 2).ToString();
+                }
+            }
+            else if (x >=locationOrtZ1.X &&
+                  x <locationOrtZ1.X + ortZ1.Width &&
+                  y >=locationOrtZ1.Y &&
+                  y <locationOrtZ1.Y + ortZ1.Height)
+            {
+                if (changeObrazX)
+                {
+                    ortX1.srodekObrazu[0] = (int)((double)(x -locationOrtZ1.X - (double)ortZ1.Width / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Width * ortX1.pow))) + (ortZ1.minX + ortZ1.maxX) / 2);
+                    ortY1.srodekObrazu[0] = (int)((double)(x -locationOrtZ1.X - (double)ortZ1.Width / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Width * ortX1.pow))) + (ortZ1.minX + ortZ1.maxX) / 2);
+                    ortZ1.srodekObrazu[0] = (int)((double)(x -locationOrtZ1.X - (double)ortZ1.Width / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Width * ortX1.pow))) + (ortZ1.minX + ortZ1.maxX) / 2);
+                    persp1.srodekObrazu[0] = (int)((double)(x -locationOrtZ1.X - (double)ortZ1.Width / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Width * ortX1.pow))) + (ortZ1.minX + ortZ1.maxX) / 2);
+                    pasekStanu.pObrazuX.Text = ((double)(x -locationOrtZ1.X - (double)ortZ1.Width / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Width * ortX1.pow))) + (ortZ1.minX + ortZ1.maxX) / 2).ToString();
+                }
+                else if (changeEkranX)
+                {
+                    ortX1.srodekKamery[0] = (int)((double)(x -locationOrtZ1.X - (double)ortZ1.Width / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Width * ortX1.pow))) + (ortZ1.minX + ortZ1.maxX) / 2);
+                    ortY1.srodekKamery[0] = (int)((double)(x -locationOrtZ1.X - (double)ortZ1.Width / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Width * ortX1.pow))) + (ortZ1.minX + ortZ1.maxX) / 2);
+                    ortZ1.srodekKamery[0] = (int)((double)(x -locationOrtZ1.X - (double)ortZ1.Width / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Width * ortX1.pow))) + (ortZ1.minX + ortZ1.maxX) / 2);
+                    persp1.srodekKamery[0] = (int)((double)(x -locationOrtZ1.X - (double)ortZ1.Width / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Width * ortX1.pow))) + (ortZ1.minX + ortZ1.maxX) / 2);
+                    pasekStanu.pKameryX.Text = ((double)(x -locationOrtZ1.X - (double)ortZ1.Width / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Width * ortX1.pow))) + (ortZ1.minX + ortZ1.maxX) / 2).ToString();
+                }
+                if (changeObrazY)
+                {
+                    ortX1.srodekObrazu[1] = (int)((double)(y -locationOrtZ1.Y - (double)ortX1.Height / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Height * ortX1.pow))) + (ortZ1.minY + ortX1.maxY) / 2);
+                    ortY1.srodekObrazu[1] = (int)((double)(y -locationOrtZ1.Y - (double)ortX1.Height / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Height * ortX1.pow))) + (ortZ1.minY + ortX1.maxY) / 2);
+                    ortZ1.srodekObrazu[1] = (int)((double)(y -locationOrtZ1.Y - (double)ortX1.Height / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Height * ortX1.pow))) + (ortZ1.minY + ortX1.maxY) / 2);
+                    persp1.srodekObrazu[1] = (int)((double)(y -locationOrtZ1.Y - (double)ortX1.Height / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Height * ortX1.pow))) + (ortZ1.minY + ortX1.maxY) / 2);
+                    pasekStanu.pObrazuY.Text = ((double)(y -locationOrtZ1.Y - (double)ortX1.Height / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Height * ortX1.pow))) + (ortZ1.minY + ortX1.maxY) / 2).ToString();
+                }
+                else if (changeEkranY)
+                {
+                    ortX1.srodekKamery[1] = (int)((double)(y -locationOrtZ1.Y - (double)ortX1.Height / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Height * ortX1.pow))) + (ortZ1.minY + ortX1.maxY) / 2);
+                    ortY1.srodekKamery[1] = (int)((double)(y -locationOrtZ1.Y - (double)ortX1.Height / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Height * ortX1.pow))) + (ortZ1.minY + ortX1.maxY) / 2);
+                    ortZ1.srodekKamery[1] = (int)((double)(y -locationOrtZ1.Y - (double)ortX1.Height / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Height * ortX1.pow))) + (ortZ1.minY + ortX1.maxY) / 2);
+                    persp1.srodekKamery[1] = (int)((double)(y -locationOrtZ1.Y - (double)ortX1.Height / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Height * ortX1.pow))) + (ortZ1.minY + ortX1.maxY) / 2);
+                    pasekStanu.pKameryY.Text = ((double)(y -locationOrtZ1.Y - (double)ortX1.Height / 2) * ((double)ortZ1.prop / ((double)(ortZ1.Height * ortX1.pow))) + (ortZ1.minY + ortX1.maxY) / 2).ToString();
+                }
+            }
+            Refresh();
+        }
+
+        //public void mouseMoved(object sender, MouseEventArgs mouseEventArgs)
+        //{
+        //    int x = e.getXOnScreen();
+        //    int y = e.getYOnScreen();
+        //    pasekStanu.changeLabel("");
+        //    if (x >= obszarRoboczy.ortX.getLocationOnScreen().getX() &&
+        //            x < obszarRoboczy.ortX.getLocationOnScreen().getX() + obszarRoboczy.ortX.getWidth() &&
+        //            y >= obszarRoboczy.ortX.getLocationOnScreen().getY() &&
+        //            y < obszarRoboczy.ortX.getLocationOnScreen().getY() + obszarRoboczy.ortX.getHeight())
+        //    {
+        //        pasekStanu.changeLabel("Y: " + (int)((double)(x - obszarRoboczy.ortX.getLocationOnScreen().getX() - (double)obszarRoboczy.ortX.getWidth() / 2) * ((double)obszarRoboczy.ortX.prop / ((double)(obszarRoboczy.ortX.getWidth() * obszarRoboczy.ortX.pow))) + (obszarRoboczy.ortX.minY + obszarRoboczy.ortX.maxY) / 2) + " Z: " + (int)((double)(y - obszarRoboczy.ortX.getLocationOnScreen().getY() - (double)obszarRoboczy.ortX.getHeight() / 2) * ((double)obszarRoboczy.ortX.prop / ((double)(obszarRoboczy.ortX.getHeight() * obszarRoboczy.ortX.pow))) + (obszarRoboczy.ortX.minZ + obszarRoboczy.ortX.maxZ) / 2));
+        //    }
+        //    else if (x >= obszarRoboczy.ortY.getLocationOnScreen().getX() &&
+        //          x < obszarRoboczy.ortY.getLocationOnScreen().getX() + obszarRoboczy.ortY.getWidth() &&
+        //          y >= obszarRoboczy.ortY.getLocationOnScreen().getY() &&
+        //          y < obszarRoboczy.ortY.getLocationOnScreen().getY() + obszarRoboczy.ortY.getHeight())
+        //    {
+        //        pasekStanu.changeLabel("X: " + (int)((double)(x - obszarRoboczy.ortY.getLocationOnScreen().getX() - (double)obszarRoboczy.ortY.getWidth() / 2) * ((double)obszarRoboczy.ortY.prop / ((double)(obszarRoboczy.ortY.getWidth() * obszarRoboczy.ortX.pow))) + (obszarRoboczy.ortY.minX + obszarRoboczy.ortY.maxX) / 2) + " Z: " + (int)((double)(y - obszarRoboczy.ortY.getLocationOnScreen().getY() - (double)obszarRoboczy.ortX.getHeight() / 2) * ((double)obszarRoboczy.ortY.prop / ((double)(obszarRoboczy.ortY.getHeight() * obszarRoboczy.ortX.pow))) + (obszarRoboczy.ortY.minZ + obszarRoboczy.ortX.maxZ) / 2));
+        //    }
+        //    else if (x >= obszarRoboczy.ortZ.getLocationOnScreen().getX() &&
+        //          x < obszarRoboczy.ortZ.getLocationOnScreen().getX() + obszarRoboczy.ortZ.getWidth() &&
+        //          y >= obszarRoboczy.ortZ.getLocationOnScreen().getY() &&
+        //          y < obszarRoboczy.ortZ.getLocationOnScreen().getY() + obszarRoboczy.ortZ.getHeight())
+        //    {
+        //        pasekStanu.changeLabel("X: " + (int)((double)(x - obszarRoboczy.ortZ.getLocationOnScreen().getX() - (double)obszarRoboczy.ortZ.getWidth() / 2) * ((double)obszarRoboczy.ortZ.prop / ((double)(obszarRoboczy.ortZ.getWidth() * obszarRoboczy.ortX.pow))) + (obszarRoboczy.ortZ.minX + obszarRoboczy.ortZ.maxX) / 2) + " Y: " + (int)((double)(y - obszarRoboczy.ortZ.getLocationOnScreen().getY() - (double)obszarRoboczy.ortX.getHeight() / 2) * ((double)obszarRoboczy.ortZ.prop / ((double)(obszarRoboczy.ortZ.getHeight() * obszarRoboczy.ortX.pow))) + (obszarRoboczy.ortZ.minY + obszarRoboczy.ortX.maxY) / 2));
+        //    }
+        //}
+
+        private void OnMouseDown(object sender, MouseEventArgs e)
+        {
+            _mousePressed = true;
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (_mousePressed)
+            {
+                mouseDragged(sender, e);
+            }
+        }
+
+        private void OnMouseUp(object sender, MouseEventArgs e)
+        {
+            _mousePressed = false;
+        }
+
+        public void mouseWheelMoved(object sender, MouseEventArgs mouseEventArgs)
+        {
+            int rot = mouseEventArgs.Delta;
+            if (rot != 0)
+            {
+                int newPow;
+                if (rot < 0)
+                {
+                    newPow = (int)(1.2 * double.Parse(pasekStanu.pow.Text));
+                }
+                else
+                {
+                    newPow = (int)(0.8 * double.Parse(pasekStanu.pow.Text));
+                }
+                if (newPow < 10)
+                {
+                    newPow = 10;
+                }
+                pasekStanu.pow.Text = newPow.ToString();
+                ortX1.pow = ((double)newPow) / 100;
+                ortY1.pow = ((double)newPow) / 100;
+                ortZ1.pow = ((double)newPow) / 100;
+                Refresh();
+            }
+        }
+
     }
 }
 

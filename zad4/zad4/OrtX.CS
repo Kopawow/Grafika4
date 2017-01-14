@@ -27,7 +27,7 @@ namespace zad4
         public int minY;
         public int maxZ;
         public int minZ;
-        double prop;
+        public double prop;
         public double pow = 0.9;
 
         int[] srodekKameryE;

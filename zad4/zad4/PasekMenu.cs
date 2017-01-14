@@ -62,7 +62,7 @@ namespace zad4
   //{
   //  super.paintComponent(g);
   //  _form.setLayout(null);
-  //  menu.setBounds(0, 0, _form.getWidth(), _form.getHeight());
+  //  menu.setBounds(0, 0, _form.Width, _form.Height);
   //}
 }
 }
