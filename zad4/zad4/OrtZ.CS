@@ -30,9 +30,9 @@ namespace zad4
         public double prop;
         public double pow = 0.9;
 
-        int[] srodekKameryE;
+        public int[] srodekKameryE;
 
-        int[] srodekObrazuE;
+        public int[] srodekObrazuE;
 
         public double[,] wierzch = new double[4, 3];
 
@@ -44,7 +44,7 @@ namespace zad4
             };
             this.Controls.Add(pb);
             pb.Paint += paint;
-        }
+            }
 
         public void paint(object sender, PaintEventArgs paintEventArgs)
         {
@@ -93,7 +93,7 @@ namespace zad4
                 pen.Color = Color.Green;
                 g.DrawRectangle(pen, srodekObrazuE[0] - 3, srodekObrazuE[1] - 3, 5, 5);
                 pen.Color = Color.Red;
-                g.DrawRectangle(pen, srodekKameryE[0] - 3, srodekKameryE[1] - 3, 5, 5);
+                g.DrawRectangle(pen, srodekKameryE[0] - 7, srodekKameryE[1] - 7, 5, 5);
                 pen.Color = kolorSceny;
                 for (int i = 0; i < trojkaty.GetLength(0); i++)
                 {

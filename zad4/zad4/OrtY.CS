@@ -28,9 +28,9 @@ namespace zad4
         public double prop;
         public double pow = 0.9;
 
-        int[] srodekKameryE;
+        public int[] srodekKameryE;
 
-        int[] srodekObrazuE;
+        public int[] srodekObrazuE;
         public double[,] wierzch = new double[4, 3];
 
         public PictureBox pb;

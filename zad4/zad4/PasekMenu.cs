@@ -15,9 +15,6 @@ namespace zad4
     public MenuItem zapiszKamere;
     public MenuItem zakoncz;
     Menu opcje;
-    public MenuItem WkolorTla;
-    public MenuItem WkolorSceny;
-    public MenuItem WkolorKamery;
     public MenuItem wPersp;
     private Form _form;
 
@@ -41,16 +38,10 @@ namespace zad4
     {
       Name = "Opcje"
     };
-    WkolorKamery = new MenuItem("Wybierz kolor kamery");
-    WkolorSceny = new MenuItem("Wybierz kolor sceny");
-    WkolorTla = new MenuItem("Wybierz kolor tła");
     wPersp = new MenuItem("Rzut perspektywiczny/prosty");
-    opcje.MenuItems.Add(WkolorKamery);
-    opcje.MenuItems.Add(WkolorSceny);
-    opcje.MenuItems.Add(WkolorTla);
     opcje.MenuItems.Add(wPersp);
       MenuItem[] arraItems = new MenuItem[plik.MenuItems.Count];
-      MenuItem[] arra2Items = new MenuItem[plik.MenuItems.Count];
+      MenuItem[] arra2Items = new MenuItem[opcje.MenuItems.Count];
       plik.MenuItems.CopyTo(arraItems, 0);
       opcje.MenuItems.CopyTo(arra2Items, 0);
     menu.MenuItems.Add(plik.Name, arraItems);

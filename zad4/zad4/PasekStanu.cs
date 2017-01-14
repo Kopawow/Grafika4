@@ -81,6 +81,7 @@ namespace zad4
             Controls.Add(pObrazuZ);
             Controls.Add(katKamery);
             Controls.Add(katKameryL);
+            this.Dock = DockStyle.Fill;
         }
 
         public void  SetPasekStanu(string startString)

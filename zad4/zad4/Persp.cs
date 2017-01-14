@@ -154,7 +154,7 @@ namespace zad4
           int maxZl = int.MinValue;
           int minZl = int.MaxValue;
           int propor;
-          for (int k = 0; k < wierzcholkiPom.Length; k++)
+          for (int k = 0; k < wierzcholkiPom.GetLength(0); k++)
           {
             if (wierzcholkiPom[k, 1] > maxYl)
             {
@@ -168,7 +168,7 @@ namespace zad4
             {
               maxZl = (int)wierzcholkiPom[k, 2];
             }
-            if (wierzcholki[k, 2] < minZl)
+            if (wierzcholkiPom[k, 2] < minZl)
             {
               minZl = (int)wierzcholkiPom[k, 2];
             }
@@ -178,7 +178,7 @@ namespace zad4
           //System.out.println(maxZl);
           //System.out.println(minZl);
           propor = Math.Max(maxYl - minYl, maxZl - minZl);
-          for (int k = 0; k < wierzcholkiPom.Length; k++)
+          for (int k = 0; k < wierzcholkiPom.GetLength(0); k++)
           {
             obraz[k, 0] = (int)(this.Width / 2 + (double)(wierzcholkiPom[k, 1] * help * 0.9 - (minYl + maxYl) / 2 * 0.9) * ((double)(this.Width) / (propor)));
             obraz[k, 1] = (this.Height / 4) + (int)(this.Height / 2 + (double)(wierzcholkiPom[k, 2] * 0.9 - (minZl + maxZl) / 2 * 0.9) * ((double)(this.Height) / (propor)));
@@ -218,7 +218,7 @@ namespace zad4
             pb.BackColor = kolorTla;
         using (Graphics g = Graphics.FromImage(bmp))
         {
-            g.DrawLine(pen, 0, 0, this.Width, this.Height);
+
             przeliczWsp();
             if (trojkaty != null &&
                 wierzcholki != null &&
